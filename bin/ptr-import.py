@@ -35,5 +35,3 @@ if args.r:
 else:
     argParser.print_help()
     exit(1)
-#r.set("foo", "bar")
-print (r.get("74.15.53.16"))
