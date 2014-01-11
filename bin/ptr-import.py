@@ -25,11 +25,11 @@ r = redis.StrictRedis(host='localhost', port=8323)
 
 if args.r:
     for x in args.r:
-        with open(x) as f:
-            for l in f:
-                (ip, ptr) = l.rstrip().split(',')
-                print (terms(ptr))
-                r.set(ip,ptr)
+        with open(x, encoding='UTF-8', errors='ignore') as f:
+                for l in f:
+                    (ip, ptr) = l.rstrip().split(',')[:2]
+                    print (terms(ptr))
+                    r.set(ip,ptr)
 else:
     argParser.print_help()
     exit(1)
