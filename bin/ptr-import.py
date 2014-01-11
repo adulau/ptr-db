@@ -12,6 +12,7 @@ import argparse
 
 argParser = argparse.ArgumentParser(description='ptr-db: Import and Index PTR records')
 argParser.add_argument('-r', action='append', help='Input file in IP,PTR format')
+argParser.add_argument('-v', action='store_true', default=False, help='Output inserted PTR records')
 args = argParser.parse_args()
 
 def terms(host=None):
@@ -28,7 +29,8 @@ if args.r:
         with open(x, encoding='UTF-8', errors='ignore') as f:
                 for l in f:
                     (ip, ptr) = l.rstrip().split(',')[:2]
-                    print (terms(ptr))
+                    if args.v:
+                        print (terms(ptr))
                     r.set(ip,ptr)
 else:
     argParser.print_help()
