@@ -28,10 +28,15 @@ if args.r:
     for x in args.r:
         with open(x, encoding='UTF-8', errors='ignore') as f:
                 for l in f:
-                    (ip, ptr) = l.rstrip().split(',')[:2]
-                    if args.v:
-                        print (terms(ptr))
-                    r.set(ip,ptr)
+                    try:
+                        (ip, ptr) = l.rstrip().split(',')[:2]
+                        if args.v:
+                            print(terms(ptr))
+                        r.set(ip,ptr)
+                    except ValueError:
+                        if args.v:
+                            print("PTR tuple missing")
+                        pass
 else:
     argParser.print_help()
     exit(1)
