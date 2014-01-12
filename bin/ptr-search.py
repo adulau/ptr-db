@@ -14,7 +14,7 @@ import netaddr
 
 argParser = argparse.ArgumentParser(description='ptr-db: Search PTR records')
 argParser.add_argument('-s', action='append', help='IPv4 subnet to lookup')
-argParser.add_argument('-v', action='store_true', default=False, help='Dump queries')
+argParser.add_argument('-v', action='store_true', default=False, help='Verbose output including non-existing PTR records')
 args = argParser.parse_args()
 
 if args.s is None:
@@ -32,4 +32,5 @@ for subnet in args.s:
         if ptr is not None:
             print (str(ip)+","+str(r.get(ip), 'utf-8'))
         else:
-            print (str(ip))
+            if args.v:
+                print (str(ip))
